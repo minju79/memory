@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "render-system",
+  "builds": [
+    { "src": "*.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
