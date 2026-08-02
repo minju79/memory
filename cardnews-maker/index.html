@@ -75,6 +75,32 @@
   .thumb-photo{ background:linear-gradient(160deg,#7c6a58,#3d332a); color:#fff; }
   .thumb-vivid{ background:linear-gradient(135deg,#7b2ff7,#f72585); color:#fff; }
 
+  .mo-badge{ font-size:8.5px; font-weight:800; color:#fff; background:linear-gradient(90deg,#ff5f8f,#7b2ff7);
+    padding:2px 6px; border-radius:8px; vertical-align:middle; margin-left:3px; letter-spacing:.3px; }
+
+  .thumb-kinetic{ background:#0a0a0a; align-items:center; justify-content:center; padding:8px; }
+  .kw-wrap{ display:flex; flex-wrap:wrap; gap:4px; justify-content:center; }
+  .kw{ font-size:11px; font-weight:900; color:#fff; opacity:0; transform:translateY(6px);
+    animation:kwPop 1.4s ease-in-out infinite; }
+  @keyframes kwPop{ 0%{opacity:0; transform:translateY(6px);} 15%,60%{opacity:1; transform:translateY(0);} 85%,100%{opacity:0; transform:translateY(6px);} }
+
+  .thumb-glow{ background:#111; position:relative; overflow:hidden; }
+  .thumb-glow .blob{ position:absolute; border-radius:50%; filter:blur(14px); opacity:.75; animation:blobFloat 5s ease-in-out infinite; }
+  .thumb-glow .b1{ width:60px; height:60px; background:#7b2ff7; top:-10px; left:-10px; }
+  .thumb-glow .b2{ width:50px; height:50px; background:#00e5ff; bottom:-14px; right:-10px; animation-delay:-2s; }
+  @keyframes blobFloat{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(8px,-6px) scale(1.15);} }
+  .thumb-glow .glass{ position:relative; z-index:1; background:rgba(255,255,255,.14); backdrop-filter:blur(3px);
+    border:1px solid rgba(255,255,255,.25); border-radius:8px; padding:6px 8px; }
+  .thumb-glow .glass .tt{ color:#fff; }
+
+  .thumb-glitch{ background:#050505; align-items:center; justify-content:center; }
+  .gl-tt{ font-size:12px; font-weight:900; color:#0affb0; position:relative; letter-spacing:.5px; }
+  .gl-tt::before, .gl-tt::after{ content:attr(data-text); position:absolute; left:0; top:0; width:100%; }
+  .gl-tt::before{ color:#ff2ec4; animation:glitchA 2.4s infinite linear; clip-path:inset(0 0 60% 0); }
+  .gl-tt::after{ color:#00e5ff; animation:glitchB 2.4s infinite linear; clip-path:inset(60% 0 0 0); }
+  @keyframes glitchA{ 0%,88%,100%{ transform:translate(0,0);} 90%{ transform:translate(-2px,-1px);} 92%{ transform:translate(2px,1px);} 94%{ transform:translate(-1px,0);} }
+  @keyframes glitchB{ 0%,88%,100%{ transform:translate(0,0);} 90%{ transform:translate(2px,1px);} 92%{ transform:translate(-2px,-1px);} 94%{ transform:translate(1px,0);} }
+
   .key-row{ display:flex; gap:8px; margin-top:8px; }
   .key-row input{ flex:1; }
   .lockline{ font-size:11.5px; color:var(--sub); margin-top:8px; display:flex; gap:6px; align-items:flex-start; line-height:1.5; }
@@ -134,13 +160,71 @@
   .cn-vivid .head{ font-size:28px; font-weight:900; line-height:1.25; }
   .cn-vivid .body{ font-size:13.5px; margin-top:14px; line-height:1.7; opacity:.95; }
   .cn-vivid .idx{ position:absolute; bottom:6%; right:8%; font-size:11px; font-weight:800; opacity:.8; }
+
+  /* ---- 타이포 모션 ---- */
+  .cn-kinetic{ background:#0a0a0a; color:#fff; justify-content:center; padding:9% 8%; overflow:hidden; }
+  .cn-kinetic .tag{ background:#fff; color:#0a0a0a; font-size:11px; font-weight:900; padding:5px 10px; border-radius:5px;
+    display:inline-block; align-self:flex-start; margin-bottom:16px; opacity:0; animation:kFadeUp .5s ease forwards; }
+  .cn-kinetic .head{ font-size:32px; font-weight:900; line-height:1.28; display:flex; flex-wrap:wrap; gap:.35em; }
+  .cn-kinetic .head .kword{ display:inline-block; opacity:0; transform:translateY(16px);
+    animation:kFadeUp .55s cubic-bezier(.2,.8,.2,1) forwards; }
+  .cn-kinetic .head .kword:nth-child(odd){ color:#eaff3d; }
+  .cn-kinetic .body{ font-size:13.5px; color:#b9b9b9; margin-top:16px; line-height:1.7; opacity:0;
+    animation:kFadeUp .5s ease forwards; }
+  .cn-kinetic .idx{ position:absolute; bottom:6%; right:8%; font-size:11px; color:#666; font-weight:700; }
+  @keyframes kFadeUp{ from{ opacity:0; transform:translateY(16px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* ---- 글로우 그라디언트 ---- */
+  .cn-glow{ background:#0e0e14; color:#fff; justify-content:center; padding:9% 8%; position:relative; overflow:hidden; }
+  .cn-glow .blob{ position:absolute; border-radius:50%; filter:blur(38px); opacity:.65; animation:glowFloat 7s ease-in-out infinite; }
+  .cn-glow .b1{ width:55%; aspect-ratio:1/1; background:#7b2ff7; top:-15%; left:-15%; }
+  .cn-glow .b2{ width:50%; aspect-ratio:1/1; background:#00e5ff; bottom:-15%; right:-15%; animation-delay:-3.5s; }
+  .cn-glow .b3{ width:35%; aspect-ratio:1/1; background:#ff5f8f; top:35%; left:30%; animation-delay:-5.5s; opacity:.45; }
+  @keyframes glowFloat{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(6%,-5%) scale(1.12);} }
+  .cn-glow .glass{ position:relative; z-index:1; background:rgba(255,255,255,.10); backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.22); border-radius:16px; padding:7% 8%; }
+  .cn-glow .tag{ font-size:11px; font-weight:800; letter-spacing:.5px; opacity:.85; margin-bottom:10px; }
+  .cn-glow .head{ font-size:26px; font-weight:900; line-height:1.28; }
+  .cn-glow .body{ font-size:13.5px; margin-top:12px; line-height:1.7; opacity:.9; }
+
+  /* ---- Y2K 글리치 ---- */
+  .cn-glitch{ background:#050505; color:#0affb0; justify-content:center; padding:9% 8%; position:relative; overflow:hidden; }
+  .cn-glitch::before{ content:""; position:absolute; inset:0; pointer-events:none;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px); }
+  .cn-glitch .tag{ background:#0affb0; color:#050505; font-size:11px; font-weight:900; padding:5px 10px; border-radius:3px;
+    display:inline-block; align-self:flex-start; margin-bottom:16px; }
+  .cn-glitch .head{ font-size:28px; font-weight:900; line-height:1.25; position:relative; color:#fff;
+    text-shadow:0 0 12px rgba(10,255,176,.55); }
+  .cn-glitch .head::before, .cn-glitch .head::after{ content:attr(data-text); position:absolute; left:0; top:0; width:100%; height:100%; }
+  .cn-glitch .head::before{ color:#ff2ec4; clip-path:inset(0 0 55% 0); animation:cardGlitchA 2.6s ease-in-out 1; animation-fill-mode:forwards; }
+  .cn-glitch .head::after{ color:#00e5ff; clip-path:inset(55% 0 0 0); animation:cardGlitchB 2.6s ease-in-out 1; animation-fill-mode:forwards; }
+  @keyframes cardGlitchA{ 0%{ transform:translate(0,0);} 8%{ transform:translate(-4px,-2px);} 14%{ transform:translate(3px,2px);}
+    20%{ transform:translate(-2px,0);} 26%,100%{ transform:translate(0,0);} }
+  @keyframes cardGlitchB{ 0%{ transform:translate(0,0);} 8%{ transform:translate(4px,2px);} 14%{ transform:translate(-3px,-2px);}
+    20%{ transform:translate(2px,0);} 26%,100%{ transform:translate(0,0);} }
+  .cn-glitch .body{ font-size:13.5px; color:#8be8cf; margin-top:14px; line-height:1.7; }
+  .cn-glitch .idx{ position:absolute; bottom:6%; right:8%; font-size:11px; color:#0affb0; font-weight:800; opacity:.7; }
+
+  /* html2canvas disables CSS `animation`/`transition` on its cloned document before rasterizing,
+     which would otherwise leave finite reveal animations frozen at their un-animated (invisible)
+     starting values. .export-freeze forces the settled end-state with plain, non-animated values
+     so the exported PNG always shows fully readable text regardless of animation timing. */
+  .card-canvas.export-freeze .cn-kinetic .tag,
+  .card-canvas.export-freeze .cn-kinetic .head .kword,
+  .card-canvas.export-freeze .cn-kinetic .body{
+    animation:none !important; opacity:1 !important; transform:none !important;
+  }
+  .card-canvas.export-freeze .cn-glitch .head::before,
+  .card-canvas.export-freeze .cn-glitch .head::after{
+    animation:none !important; transform:none !important;
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <h1>🧩 카드뉴스 메이커</h1>
-    <p>유튜브 링크 + 대본을 붙여넣으면<br/>GPT가 요약하고 GPT Image가 배경을 그려 카드뉴스를 완성해요.</p>
+    <p>유튜브 링크 + 대본을 붙여넣으면<br/>GPT가 요약하고 GPT Image가 배경을 그려 카드뉴스를 완성해요.<br/>타이포 모션 · 글로우 · 글리치 등 요즘 인스타 스타일 애니메이션 프리뷰 지원.</p>
   </header>
 
   <div class="steps">
@@ -207,6 +291,28 @@
         <div class="tpl-name">팝 비비드</div>
         <div class="tpl-desc">그라데이션, 캐주얼</div>
       </div>
+      <div class="tpl-card" data-tpl="kinetic">
+        <div class="tpl-thumb thumb-kinetic">
+          <div class="kw-wrap"><span class="kw" style="animation-delay:.0s">여름에</span><span class="kw" style="animation-delay:.15s">꼭</span><span class="kw" style="animation-delay:.3s">가야 할</span></div>
+        </div>
+        <div class="tpl-name">타이포 모션 <span class="mo-badge">MOTION</span></div>
+        <div class="tpl-desc">글자가 하나씩 등장하는 킨네틱 타이포</div>
+      </div>
+      <div class="tpl-card" data-tpl="glow">
+        <div class="tpl-thumb thumb-glow">
+          <div class="blob b1"></div><div class="blob b2"></div>
+          <div class="glass"><span class="tt">여름에 꼭<br/>가야 할 카페</span></div>
+        </div>
+        <div class="tpl-name">글로우 그라디언트 <span class="mo-badge">MOTION</span></div>
+        <div class="tpl-desc">은은하게 흐르는 그라디언트 배경</div>
+      </div>
+      <div class="tpl-card" data-tpl="glitch">
+        <div class="tpl-thumb thumb-glitch">
+          <div class="gl-tt" data-text="여름 카페 4곳">여름 카페 4곳</div>
+        </div>
+        <div class="tpl-name">Y2K 글리치 <span class="mo-badge">MOTION</span></div>
+        <div class="tpl-desc">네온 글리치 인트로, 형광 톤</div>
+      </div>
     </div>
 
     <label class="field-label">비율</label>
@@ -244,7 +350,7 @@
   <section id="panelResult" style="display:none">
     <div class="panel">
       <h2>✅ 완성!</h2>
-      <p class="hint">좌우로 넘겨서 확인하고, 개별 저장하거나 전체를 zip으로 받으세요.</p>
+      <p class="hint">좌우로 넘겨서 확인하고, 개별 저장하거나 전체를 zip으로 받으세요. 모션 템플릿은 앱 안에서 애니메이션으로 재생되고, 다운로드되는 이미지는 완료된 장면의 정지 이미지예요.</p>
       <div class="carousel" id="carousel"></div>
       <div class="btn-row">
         <button class="ghost" id="downloadAllBtn">📦 전체 ZIP 다운로드</button>
@@ -277,10 +383,13 @@
   };
 
   var TPL_META = {
-    press:  { label:"테이블 프레스" },
-    impact: { label:"블랙 임팩트" },
-    photo:  { label:"매거진 포토" },
-    vivid:  { label:"팝 비비드" }
+    press:   { label:"테이블 프레스" },
+    impact:  { label:"블랙 임팩트" },
+    photo:   { label:"매거진 포토" },
+    vivid:   { label:"팝 비비드" },
+    kinetic: { label:"타이포 모션", motion:true },
+    glow:    { label:"글로우 그라디언트", motion:true },
+    glitch:  { label:"Y2K 글리치", motion:true }
   };
 
   document.getElementById("apiKey").value = state.apiKey;
@@ -541,13 +650,41 @@
         '<div class="inner"><span class="tag">' + tag + '</span><div class="head">' + head + '</div><div class="body">' + body + '</div></div>' +
         '</div>';
     }
-    // vivid
-    return '<div class="cn-card cn-vivid">' +
-      '<div class="tag">' + tag + ' · ' + idxLabel + '</div>' +
-      '<div class="head">' + head + '</div>' +
-      '<div class="body">' + body + '</div>' +
-      '<div class="idx">✦</div>' +
-      '</div>';
+    if(tpl === "vivid"){
+      return '<div class="cn-card cn-vivid">' +
+        '<div class="tag">' + tag + ' · ' + idxLabel + '</div>' +
+        '<div class="head">' + head + '</div>' +
+        '<div class="body">' + body + '</div>' +
+        '<div class="idx">✦</div>' +
+        '</div>';
+    }
+    if(tpl === "kinetic"){
+      var words = (card.head || "").split(/\s+/).filter(Boolean);
+      var wordsHtml = words.map(function(w, i){
+        return '<span class="kword" style="animation-delay:' + (0.15 * i + 0.1).toFixed(2) + 's">' + escapeHtml(w) + '</span>';
+      }).join("");
+      return '<div class="cn-card cn-kinetic">' +
+        '<span class="tag" style="animation-delay:0s">' + tag + '</span>' +
+        '<div class="head">' + wordsHtml + '</div>' +
+        '<div class="body" style="animation-delay:' + (0.15 * words.length + 0.25).toFixed(2) + 's">' + body + '</div>' +
+        '<div class="idx">' + idxLabel + '</div>' +
+        '</div>';
+    }
+    if(tpl === "glow"){
+      return '<div class="cn-card cn-glow">' +
+        '<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>' +
+        '<div class="glass"><div class="tag">' + tag + ' · ' + idxLabel + '</div>' +
+        '<div class="head">' + head + '</div><div class="body">' + body + '</div></div>' +
+        '</div>';
+    }
+    if(tpl === "glitch"){
+      return '<div class="cn-card cn-glitch">' +
+        '<span class="tag">' + tag + '</span>' +
+        '<div class="head" data-text="' + head + '">' + head + '</div>' +
+        '<div class="body">' + body + '</div>' +
+        '<div class="idx">' + idxLabel + '</div>' +
+        '</div>';
+    }
   }
 
   function renderAllCards(){
@@ -562,6 +699,16 @@
       canvasEl.className = "card-canvas " + ratioClass;
       canvasEl.innerHTML = cardHtml(card, idx, state.cards.length);
       wrap.appendChild(canvasEl);
+
+      if(TPL_META[state.template] && TPL_META[state.template].motion){
+        var replay = document.createElement("button");
+        replay.className = "ghost";
+        replay.style.marginTop = "8px";
+        replay.style.width = "100%";
+        replay.textContent = "▶ 애니메이션 다시보기";
+        replay.onclick = function(){ replayAnimations(canvasEl); };
+        wrap.appendChild(replay);
+      }
 
       var dl = document.createElement("button");
       dl.className = "ghost";
@@ -578,8 +725,20 @@
     return new Promise(function(res){ setTimeout(res, 150); });
   }
 
+  function replayAnimations(el){
+    // re-trigger CSS animations by re-inserting fresh markup (forces the browser to restart from 0%)
+    var html = el.innerHTML;
+    el.innerHTML = "";
+    void el.offsetWidth; // force reflow
+    el.innerHTML = html;
+  }
+
   function exportCard(el, idx){
+    // see .export-freeze rules above: html2canvas strips CSS animations on its clone,
+    // which would leave finite reveal animations stuck at their invisible start state.
+    el.classList.add("export-freeze");
     return html2canvas(el, { scale: 3, useCORS: true, backgroundColor: null }).then(function(canvas){
+      el.classList.remove("export-freeze");
       var link = document.createElement("a");
       link.download = "cardnews_" + (idx+1) + ".png";
       link.href = canvas.toDataURL("image/png");
@@ -596,7 +755,9 @@
     var chain = Promise.resolve();
     cards.forEach(function(el, idx){
       chain = chain.then(function(){
+        el.classList.add("export-freeze");
         return html2canvas(el, { scale: 3, useCORS: true, backgroundColor: null }).then(function(canvas){
+          el.classList.remove("export-freeze");
           var dataUrl = canvas.toDataURL("image/png").split(",")[1];
           zip.file("cardnews_" + (idx+1) + ".png", dataUrl, { base64: true });
         });
