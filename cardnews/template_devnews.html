@@ -9,7 +9,10 @@
   --accent:#FFE24B;
   --W:1080px; --H:1350px; --pad:76px;
 
-  /* 분야별 색 */
+  /* 투자축 4개 — 광주를 실제로 움직이는 축 */
+  --c-통합:#C08CFF; --c-반도체AI:#4ED9C4; --c-토지허가:#FF6B6B;
+  --c-군공항:#FF8A5A; --c-기타:#5AA9FF;
+  /* 일반 분야 (필요할 때) */
   --c-교통:#5AA9FF; --c-재개발:#FF8A5A; --c-산단:#7DD87D;
   --c-주택:#C08CFF;  --c-공공:#4ED9C4;  --c-도시계획:#FFE24B;
 
@@ -76,6 +79,10 @@ h2{font-size:60px;font-weight:800;letter-spacing:-.04em;line-height:1.25;white-s
 .meta .r{display:flex;gap:22px;font-size:29px;letter-spacing:-.02em}
 .meta .k{flex:none;width:130px;font-weight:700;color:var(--muted)}
 .meta .v{font-weight:600;color:var(--text)}
+/* 공식자료냐 언론보도냐 — "뉴스가 아니라 데이터"라는 주장의 근거 */
+.tier{display:inline-block;font-size:23px;font-weight:800;padding:5px 14px;
+  border-radius:7px;margin-right:12px;background:#7DD87D;color:#0B0E13;vertical-align:2px}
+.tier.ref{background:var(--line);color:var(--muted)}
 
 /* 여러 건 한 장에 */
 .list ul{margin-top:44px;list-style:none;display:flex;flex-direction:column;gap:28px}
@@ -147,6 +154,11 @@ const tags = c => {
   </div>`;
 };
 
+// 기본은 '공식'. 언론 보도일 때만 tier:"참고" 를 넣는다.
+const tier = t => t === '참고'
+  ? '<span class="tier ref">언론보도</span>'
+  : '<span class="tier">공식자료</span>';
+
 const gauge = c => {
   const s = stageOf(c);
   if (s === null) return '';
@@ -172,7 +184,7 @@ const build = {
       <div class="pts">${(c.points || []).map(p => `<div class="pt"><span>${esc(p)}</span></div>`).join('')}</div>
       <div class="meta">
         ${c.area ? `<div class="r"><span class="k">영향 지역</span><span class="v">${esc(c.area)}</span></div>` : ''}
-        <div class="r"><span class="k">출처</span><span class="v">${esc(c.source)}${c.date ? ` · ${esc(c.date)}` : ''}</span></div>
+        <div class="r"><span class="k">출처</span><span class="v">${tier(c.tier)}${esc(c.source)}${c.date ? ` · ${esc(c.date)}` : ''}</span></div>
       </div>
     </div>`,
 
@@ -198,7 +210,8 @@ const build = {
 
   source: c => `<div class="body source"><h2>${esc(c.title || '출처')}</h2><ol>
       ${c.items.map((i, n) => `<li><span class="n">${n + 1}</span>
-        <span><span class="t">${esc(i.title)}</span><br><span class="p">${esc(i.press)}${i.date ? ` · ${esc(i.date)}` : ''}</span></span></li>`).join('')}
+        <span><span class="t">${esc(i.title)}</span><br>
+          <span class="p">${tier(i.tier)}${esc(i.press)}${i.date ? ` · ${esc(i.date)}` : ''}</span></span></li>`).join('')}
     </ol>
     <div class="disc">${esc(c.disclaimer || M.disclaimer || '')}</div></div>`,
 
