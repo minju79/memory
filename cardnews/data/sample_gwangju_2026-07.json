@@ -3,7 +3,7 @@
   "meta": {
     "region": "광주 부동산",
     "period": "2026년 7월",
-    "handle": "@nadooai",
+    "handle": "모든AI부동산",
     "sample": true
   },
   "cards": [
@@ -68,7 +68,7 @@
       "type": "cta",
       "title": "우리 동네는\n어떻게 움직였을까요?",
       "body": "궁금한 단지명을 댓글에 남겨주시면\n다음 카드뉴스에서 실거래 흐름을 분석해 드립니다.",
-      "handle": "@nadooai"
+      "handle": "모든AI부동산"
     }
   ]
 }
