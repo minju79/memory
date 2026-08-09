@@ -13,9 +13,9 @@
   --c-교통:#5AA9FF; --c-재개발:#FF8A5A; --c-산단:#7DD87D;
   --c-주택:#C08CFF;  --c-공공:#4ED9C4;  --c-도시계획:#FFE24B;
 
-  /* 진행 단계 색 — 여기서 신뢰가 갈린다 */
-  --s-검토:#6B7686; --s-추진:#5AA9FF; --s-확정:#FFE24B;
-  --s-착공:#7DD87D; --s-준공:#7DD87D;
+  /* 개발단계 0~7 — 3단계(공식지정·고시)가 분기점이라 여기서 색이 채워진다 */
+  --s-0:#6B7686; --s-1:#6B7686; --s-2:#5AA9FF; --s-3:#FFE24B;
+  --s-4:#FFC93C; --s-5:#FFA83C; --s-6:#7DD87D; --s-7:#5FC98F;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#333;font-family:Pretendard,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -43,6 +43,15 @@ body{background:#333;font-family:Pretendard,system-ui,sans-serif;-webkit-font-sm
 .tag.cat{background:var(--cat,#FFE24B);color:#0B0E13}
 .tag.st{border:3px solid var(--st,#6B7686);color:var(--st,#6B7686)}
 .tag.st.on{background:var(--st);color:#0B0E13;border-color:var(--st)}
+
+/* 0~7 단계 게이지 — 지금 이 사업이 어디까지 왔는지 한눈에 */
+.gauge{margin-top:30px}
+.gauge .bars{display:flex;gap:8px}
+.gauge .b{flex:1;height:16px;border-radius:5px;background:var(--line)}
+.gauge .b.done{background:var(--st,#FFE24B);opacity:.42}
+.gauge .b.now{background:var(--st,#FFE24B);opacity:1}
+.gauge .lg{margin-top:14px;display:flex;justify-content:space-between;
+  font-size:23px;font-weight:600;color:var(--muted);letter-spacing:-.02em}
 
 /* 표지 */
 .badge{display:inline-block;align-self:flex-start;background:var(--accent);color:#0B0E13;
@@ -120,14 +129,33 @@ const D = JSON.parse(document.getElementById('payload').textContent);
 const M = D.meta || {};
 const esc = s => String(s ?? '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const catVar = c => `--cat:var(--c-${esc(c)}, #FFE24B)`;
-const stVar  = s => `--st:var(--s-${esc(s)}, #6B7686)`;
-// 확정 이후 단계만 색을 채운다. "검토중"이 확정처럼 보이면 안 된다.
-const stOn = s => ['확정', '착공', '준공'].includes(s) ? ' on' : '';
 
-const tags = c => `<div class="tags">
+// 개발 레이더의 0~7 단계 체계
+const STAGE = ['관심·발언', '정책검토', '계획발표', '공식지정·고시',
+               '시행계획 구체화', '입찰·발주', '착공·공사', '준공·운영'];
+const stageOf = c => (typeof c.stage === 'number' && c.stage >= 0 && c.stage <= 7) ? c.stage : null;
+const stVar = s => `--st:var(--s-${s}, #6B7686)`;
+// 3단계(고시) 이상만 색을 채운다. 고시 전이 확정처럼 보이면 안 된다.
+const stOn = s => s >= 3 ? ' on' : '';
+
+const tags = c => {
+  const s = stageOf(c);
+  const label = s === null ? c.status : `${s}단계 · ${c.stageLabel || STAGE[s]}`;
+  return `<div class="tags">
     ${c.category ? `<span class="tag cat" style="${catVar(c.category)}">${esc(c.category)}</span>` : ''}
-    ${c.status ? `<span class="tag st${stOn(c.status)}" style="${stVar(c.status)}">${esc(c.status)}</span>` : ''}
+    ${label ? `<span class="tag st${s === null ? '' : stOn(s)}" style="${stVar(s ?? 0)}">${esc(label)}</span>` : ''}
   </div>`;
+};
+
+const gauge = c => {
+  const s = stageOf(c);
+  if (s === null) return '';
+  return `<div class="gauge" style="${stVar(s)}">
+    <div class="bars">${STAGE.map((_, i) =>
+      `<span class="b${i < s ? ' done' : i === s ? ' now' : ''}"></span>`).join('')}</div>
+    <div class="lg"><span>0 관심</span><span>3 고시</span><span>7 준공</span></div>
+  </div>`;
+};
 
 const build = {
   cover: c => `<div class="body cover">
@@ -139,6 +167,7 @@ const build = {
 
   news: c => `<div class="body news" style="${catVar(c.category)}">
       ${tags(c)}
+      ${gauge(c)}
       <h3>${esc(c.headline)}</h3>
       <div class="pts">${(c.points || []).map(p => `<div class="pt"><span>${esc(p)}</span></div>`).join('')}</div>
       <div class="meta">
