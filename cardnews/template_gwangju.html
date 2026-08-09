@@ -34,7 +34,9 @@ body{background:#333;font-family:Pretendard,system-ui,sans-serif;-webkit-font-sm
   display:flex;justify-content:space-between;align-items:center;
   font-size:26px;font-weight:600;color:var(--muted);letter-spacing:-.02em}
 .card .foot .handle{color:var(--text);font-weight:800}
-.body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:56px 0}
+/* 기본은 상단 정렬 — 캐러셀을 넘길 때 제목 위치가 튀지 않게. 표지·마무리만 가운데. */
+.body{flex:1;display:flex;flex-direction:column;padding:56px 0}
+.body.cover,.cta .body{justify-content:center}
 
 /* 샘플 데이터 워터마크 — 실데이터 넣으면 meta.sample:false 로 끈다 */
 .wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;

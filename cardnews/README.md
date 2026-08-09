@@ -4,8 +4,30 @@
 **6장에 5초. 무료, 무제한, 로그인 없음.**
 
 ```bash
+# 실거래 월간 리포트
 python3 render.py --data data/sample_gwangju_2026-07.json --out out
+
+# 개발 레이더 (주간 개발 소식)
+python3 render.py --data data/sample_devnews_2026-08.json \
+                  --template template_devnews.html --out out
 ```
+
+## 템플릿 2종
+
+| 템플릿 | 용도 | 카드 종류 |
+|---|---|---|
+| `template_gwangju.html` | 실거래 월간 리포트 | cover · stat · rank · table · insight · cta |
+| `template_devnews.html` | **개발 레이더** (개발·교통 소식) | cover · list · news · timeline · impact · source · cta |
+
+개발 레이더는 **링크나 헤드라인만 넣으면** 클로드가 읽고 JSON을 만들어 줍니다.
+규칙은 [`개발레이더_작성법.md`](개발레이더_작성법.md), 입력 예시는 [`input/이번주_예시.txt`](input/이번주_예시.txt).
+
+```
+링크 / 헤드라인 → [클로드] 요약·분류·단계판정·해설 → JSON → [render.py] → PNG
+```
+
+진행 단계(`검토`/`추진`/`확정`/`착공`/`준공`) 배지가 카드마다 붙습니다.
+**"검토중"을 "확정"처럼 올리면 신뢰를 잃기 때문에**, 애매하면 한 단계 낮춰 잡는 것이 규칙입니다.
 
 ---
 
