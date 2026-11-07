@@ -9,19 +9,19 @@
 @font-face{font-family:P;font-weight:800;src:url(node_modules/pretendard/dist/web/static/woff2/Pretendard-ExtraBold.woff2)}
 @font-face{font-family:P;font-weight:900;src:url(node_modules/pretendard/dist/web/static/woff2/Pretendard-Black.woff2)}
 :root{
-  --navy:#0A1324; --navy2:#101C33; --black:#05080F; --char:#1B2232; --char2:#252D40;
-  --gold:#D9AE55; --gold2:#F1CF85; --orange:#F2862B; --white:#F6F3EC; --gray:#A9B0BE; --dim:#6E7686;
+  --navy:#0B0B0B; --navy2:#121212; --black:#000000; --char:#161513; --char2:#211F1B;
+  --gold:#D4AF37; --gold2:#F0D58C; --orange:#E8762B; --white:#F7F4EC; --gray:#A8A194; --dim:#6B665E;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1080px;height:1920px;overflow:hidden;background:var(--navy)}
 body{font-family:P,'WenQuanYi Zen Hei',sans-serif;color:var(--white);position:relative;letter-spacing:-0.02em}
 .abs{position:absolute}
-#bg{position:absolute;inset:0;background:radial-gradient(1200px 1400px at 50% 38%,#16264A 0%,var(--navy) 55%,var(--black) 100%)}
-#grid{position:absolute;inset:-200px;opacity:.16;
-  background-image:linear-gradient(rgba(217,174,85,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(217,174,85,.35) 1px,transparent 1px);
+#bg{position:absolute;inset:0;background:radial-gradient(1200px 1400px at 50% 38%,#241D0F 0%,#0E0C09 50%,var(--black) 100%)}
+#grid{position:absolute;inset:-200px;opacity:.09;
+  background-image:linear-gradient(rgba(212,175,55,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.35) 1px,transparent 1px);
   background-size:90px 90px}
 #glow{position:absolute;width:900px;height:900px;border-radius:50%;left:90px;top:300px;
-  background:radial-gradient(circle,rgba(217,174,85,.22),rgba(217,174,85,0) 65%)}
+  background:radial-gradient(circle,rgba(212,175,55,.22),rgba(212,175,55,0) 65%)}
 #vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%)}
 .scene{position:absolute;inset:0;opacity:0}
 .center{left:0;right:0;text-align:center}
@@ -34,23 +34,23 @@ body{font-family:P,'WenQuanYi Zen Hei',sans-serif;color:var(--white);position:re
 
 /* captions */
 #cap{position:absolute;left:60px;right:60px;top:1300px;display:flex;justify-content:center}
-#cap .box{background:rgba(3,6,12,.72);border:1px solid rgba(217,174,85,.35);border-radius:20px;padding:20px 34px;
+#cap .box{background:rgba(0,0,0,.8);border:1px solid rgba(212,175,55,.35);border-radius:20px;padding:20px 34px;
   font-weight:800;font-size:58px;line-height:1.28;text-align:center;max-width:960px}
 .hl{color:var(--gold2)}
 .or{color:var(--orange)}
 
 /* scene A */
 .h-white{font-weight:800;font-size:82px;line-height:1.15}
-.h-gold{font-weight:900;font-size:122px;line-height:1.08;color:var(--gold);text-shadow:0 6px 30px rgba(217,174,85,.25)}
+.h-gold{font-weight:900;font-size:122px;line-height:1.08;color:var(--gold);text-shadow:0 6px 30px rgba(212,175,55,.25)}
 #shop{left:160px;top:800px;width:760px;height:420px}
 #shop .awn{position:absolute;left:-30px;right:-30px;top:0;height:90px;border-radius:10px 10px 0 0;
   background:repeating-linear-gradient(90deg,var(--gold) 0 60px,var(--char2) 60px 120px)}
 #shop .sign{position:absolute;left:150px;right:150px;top:110px;height:70px;border:3px solid var(--gold);border-radius:10px;
-  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:38px;color:var(--gold2);background:rgba(10,19,36,.8)}
-#shop .body{position:absolute;left:0;right:0;top:200px;bottom:0;background:var(--char);border:3px solid #3A4459;border-top:none}
-#shop .win{position:absolute;top:30px;bottom:40px;width:250px;border:3px solid #4A5570;
-  background:linear-gradient(160deg,rgba(241,207,133,.55),rgba(217,174,85,.12) 60%,rgba(10,19,36,.3))}
-#shop .door{position:absolute;left:300px;width:160px;top:30px;bottom:0;border:3px solid #4A5570;background:linear-gradient(180deg,#2A3348,#1A2131)}
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:38px;color:var(--gold2);background:rgba(8,8,8,.85)}
+#shop .body{position:absolute;left:0;right:0;top:200px;bottom:0;background:var(--char);border:3px solid #3A3630;border-top:none}
+#shop .win{position:absolute;top:30px;bottom:40px;width:250px;border:3px solid #4A453C;
+  background:linear-gradient(160deg,rgba(241,207,133,.55),rgba(212,175,55,.12) 60%,rgba(8,8,8,.3))}
+#shop .door{position:absolute;left:300px;width:160px;top:30px;bottom:0;border:3px solid #4A453C;background:linear-gradient(180deg,#2C2924,#141311)}
 #stamp{left:250px;top:880px;width:580px;height:250px;border:12px solid var(--orange);border-radius:26px;
   display:flex;align-items:center;justify-content:center;font-weight:900;font-size:92px;color:var(--orange);
   background:rgba(10,8,6,.55);opacity:0}
@@ -68,7 +68,7 @@ body{font-family:P,'WenQuanYi Zen Hei',sans-serif;color:var(--white);position:re
 /* scene C */
 #three{font-weight:900;font-size:330px;line-height:1;color:var(--gold)}
 #three span{font-size:130px;color:var(--white);margin-left:10px}
-.pill{left:150px;width:780px;height:104px;border-radius:52px;background:var(--char);border:2px solid rgba(217,174,85,.5);
+.pill{left:150px;width:780px;height:104px;border-radius:52px;background:var(--char);border:2px solid rgba(212,175,55,.5);
   display:flex;align-items:center;padding-left:24px;font-weight:800;font-size:52px;opacity:0}
 .pill i{font-style:normal;width:70px;height:70px;border-radius:50%;background:var(--gold);color:var(--navy);display:inline-flex;
   align-items:center;justify-content:center;font-weight:900;font-size:42px;margin-right:28px}
@@ -76,7 +76,7 @@ body{font-family:P,'WenQuanYi Zen Hei',sans-serif;color:var(--white);position:re
 /* step scenes */
 .step{font-weight:800;font-size:42px;color:var(--gold);letter-spacing:.12em}
 .stitle{font-weight:900;font-size:100px;line-height:1.1}
-.card{left:64px;right:64px;border-radius:28px;background:linear-gradient(180deg,var(--char2),var(--char));border:2px solid rgba(217,174,85,.55);overflow:hidden}
+.card{left:64px;right:64px;border-radius:28px;background:linear-gradient(180deg,var(--char2),var(--char));border:2px solid rgba(212,175,55,.55);overflow:hidden}
 .ex{position:absolute;right:22px;top:20px;font-size:30px;font-weight:700;color:var(--navy);background:var(--gray);border-radius:8px;padding:4px 14px}
 .row{position:absolute;left:50px;right:50px;opacity:0}
 .row .k{font-weight:700;font-size:38px;color:var(--gray)}
@@ -88,37 +88,37 @@ body{font-family:P,'WenQuanYi Zen Hei',sans-serif;color:var(--white);position:re
 
 /* map */
 #map{top:600px;height:600px}
-#map .road{position:absolute;background:#2F3A52}
-#pin{position:absolute;width:56px;height:56px;left:448px;top:272px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--gold);box-shadow:0 0 0 10px rgba(217,174,85,.2)}
-#ring{position:absolute;border:4px dashed var(--gold);border-radius:50%;background:rgba(217,174,85,.07)}
+#map .road{position:absolute;background:#2B2823}
+#pin{position:absolute;width:56px;height:56px;left:448px;top:272px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--gold);box-shadow:0 0 0 10px rgba(212,175,55,.2)}
+#ring{position:absolute;border:4px dashed var(--gold);border-radius:50%;background:rgba(212,175,55,.07)}
 .dot{position:absolute;width:38px;height:38px;border-radius:50%;background:var(--orange);border:4px solid #FFD2A8;opacity:0}
-.dot.out{background:#4A5570;border-color:#6E7686}
+.dot.out{background:#4A453C;border-color:#6B665E}
 #rlabel{position:absolute;left:30px;bottom:24px;font-weight:800;font-size:38px;color:var(--gold2)}
 #count{position:absolute;right:28px;bottom:16px;font-weight:900;font-size:58px;color:var(--orange)}
 #count small{font-size:36px;color:var(--white);font-weight:800;margin-right:10px}
 
 /* grid */
 #tgrid{left:64px;right:64px;top:610px;height:560px}
-.cell{position:absolute;width:464px;height:268px;border-radius:24px;background:var(--char);border:2px solid #3A4459;opacity:.35}
+.cell{position:absolute;width:464px;height:268px;border-radius:24px;background:var(--char);border:2px solid #3A3630;opacity:.35}
 .cell .nm{position:absolute;left:30px;top:26px;font-weight:900;font-size:54px}
 .cell .ic{position:absolute;right:30px;top:28px;width:64px;height:64px;border-radius:50%}
-.sun{background:var(--gold);box-shadow:0 0 0 10px rgba(217,174,85,.25)}
+.sun{background:var(--gold);box-shadow:0 0 0 10px rgba(212,175,55,.25)}
 .moon{background:transparent;box-shadow:inset -18px -6px 0 0 var(--gold2)}
-.cell .bar{position:absolute;left:30px;right:30px;bottom:40px;height:30px;border-radius:15px;background:#0E1526;overflow:hidden}
+.cell .bar{position:absolute;left:30px;right:30px;bottom:40px;height:30px;border-radius:15px;background:#050505;overflow:hidden}
 .cell .fill{height:100%;width:0;border-radius:15px;background:linear-gradient(90deg,var(--gold),var(--orange))}
 .cell .ppl{position:absolute;left:30px;bottom:84px;font-weight:700;font-size:34px;color:var(--gray)}
 #walk{font-weight:900;font-size:56px;color:var(--gold2);top:1200px;opacity:0}
 
 /* phone */
-#phone{left:220px;top:600px;width:640px;height:640px;border-radius:56px 56px 0 0;background:#0D1424;border:10px solid #2A3348;border-bottom:none;overflow:hidden}
-#phone .top{height:110px;border-bottom:2px solid #232C40;display:flex;align-items:center;justify-content:center;flex-direction:column}
+#phone{left:220px;top:600px;width:640px;height:640px;border-radius:56px 56px 0 0;background:#0A0A09;border:10px solid #2C2924;border-bottom:none;overflow:hidden}
+#phone .top{height:110px;border-bottom:2px solid #262320;display:flex;align-items:center;justify-content:center;flex-direction:column}
 #phone .top .to{font-size:28px;color:var(--gray);font-weight:700}
 #phone .top .num{font-size:42px;font-weight:900;color:var(--white)}
 .bub{position:absolute;max-width:470px;border-radius:30px;padding:22px 28px;font-weight:800;font-size:40px;line-height:1.35;opacity:0}
 #out{right:28px;top:150px;background:var(--gold);color:var(--navy);border-bottom-right-radius:8px}
 #out div{white-space:nowrap}
 #sent{position:absolute;right:36px;font-size:26px;color:var(--gray);font-weight:700;opacity:0}
-#rep{left:24px;top:420px;max-width:none;white-space:nowrap;font-size:37px;padding:22px 24px;background:var(--char2);color:var(--white);border:2px solid rgba(217,174,85,.5);border-bottom-left-radius:8px}
+#rep{left:24px;top:420px;max-width:none;white-space:nowrap;font-size:37px;padding:22px 24px;background:var(--char2);color:var(--white);border:2px solid rgba(212,175,55,.5);border-bottom-left-radius:8px}
 
 /* end card */
 #endc .brand1{font-weight:900;font-size:112px;line-height:1.05}
@@ -342,7 +342,7 @@ window.render=function(t){
   // F
   { fade($('tgrid'),t,22.6,0.35,40);
     const on=[['f1',23.45],['f2',23.95],['f3',24.55],['f4',25.05]]; const lv=[0.82,0.30,0.58,0.16];
-    on.forEach(([id,s],i)=>{const c=$(id);const k=P(t,s,0.25);c.style.opacity=lerp(0.35,1,k);c.style.borderColor=k>0.5?'rgba(217,174,85,.8)':'#3A4459';
+    on.forEach(([id,s],i)=>{const c=$(id);const k=P(t,s,0.25);c.style.opacity=lerp(0.35,1,k);c.style.borderColor=k>0.5?'rgba(212,175,55,.8)':'#3A3630';
       c.querySelector('.fill').style.width=(eo(P(t,25.8+i*0.25,0.9))*lv[i]*100)+'%';});
   }
   // G/H
