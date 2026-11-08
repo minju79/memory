@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>숨은 정부지원금</title>
+<style>
+@font-face{font-family:P;font-weight:800;src:url(node_modules/pretendard/dist/web/static/woff2/Pretendard-ExtraBold.woff2)}
+@font-face{font-family:P;font-weight:900;src:url(node_modules/pretendard/dist/web/static/woff2/Pretendard-Black.woff2)}
+:root{--y:#FFD21F;--m:#3CF5C8;--w:#FFFFFF;--ink:#0B1530}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#050A1A}
+body{font-family:P,'WenQuanYi Zen Hei',sans-serif;position:relative;letter-spacing:-0.02em}
+#world{position:absolute;left:0;top:0;width:1536px;height:2752px;transform-origin:0 0}
+#world img{position:absolute;left:0;top:0;width:1536px;height:2752px}
+/* phone bubble patch (image px) */
+#bub{position:absolute;left:1120px;top:1586px;width:356px;height:200px;transform-origin:181px 94px}
+#patch{position:absolute;left:18px;top:18px;width:278px;height:146px;border-radius:18px;
+  background:linear-gradient(180deg,#E2FAFF,#D6F2FF);box-shadow:0 0 10px 6px #DCF6FF}
+#ptxt{position:absolute;left:18px;top:24px;width:278px;text-align:center;color:var(--ink);font-weight:900;font-size:45px;line-height:1.22}
+#ptxt b{color:#0A7A4E}
+#nchk{position:absolute;left:276px;top:-4px;width:82px;height:82px;border-radius:50%;background:#2DBE55;border:5px solid #E9FFF0;
+  box-shadow:0 4px 14px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:52px}
+.ring{position:absolute;width:220px;height:220px;border-radius:50%;border:12px solid var(--y);opacity:0;box-shadow:0 0 30px rgba(255,210,31,.7)}
+/* fixed headline strip */
+#head{position:absolute;left:0;top:0;width:1080px;height:600px;background-repeat:no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 480px,transparent 590px);mask-image:linear-gradient(to bottom,#000 0,#000 480px,transparent 590px);
+  transform-origin:540px 340px}
+.spark{position:absolute;width:34px;height:34px;background:#FFF6C8;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  filter:drop-shadow(0 0 8px #FFD21F)}
+/* captions */
+#cap{position:absolute;left:44px;right:44px;top:1288px;display:flex;justify-content:center}
+#box{background:rgba(4,10,30,.82);border:3px solid rgba(60,245,200,.75);border-radius:26px;padding:22px 30px;box-shadow:0 0 28px rgba(0,190,255,.45);
+  color:var(--w);font-weight:900;font-size:62px;line-height:1.26;text-align:center;text-shadow:0 4px 0 rgba(0,0,0,.6)}
+.y{color:var(--y)} .m{color:var(--m)}
+.tel{display:block;font-size:80px;color:var(--y);letter-spacing:0;margin-top:6px}
+.sm{display:block;font-size:34px;font-weight:800;color:#B9C6E6;margin-top:6px}
+</style>
+</head>
+<body>
+<div id="world">
+  <img src="thumb_original.png" alt="">
+  <div id="bub"><div id="patch"></div><div id="ptxt">맞춤 지원사업<br><b>3건</b> 찾았어요</div><div id="nchk">✓</div></div>
+  <div class="ring" id="r1" style="left:1252px;top:908px"></div>
+  <div class="ring" id="r2" style="left:28px;top:1638px"></div>
+</div>
+<div id="head"></div>
+<div id="sparks"></div>
+<div id="cap"><div id="box"></div></div>
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,s,d)=>clamp((t-s)/d);
+const eo=x=>1-Math.pow(1-x,3);
+const eb=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+const S0=1080/1536, OY=-7, DUR=19;
+// headline strip uses the same image, fixed (never zooms)
+const hd=$('head'); hd.style.backgroundImage='url(thumb_original.png)'; hd.style.backgroundSize='1080px auto'; hd.style.backgroundPosition=`0 ${OY}px`;
+
+const CAPS=[
+  [0.8,3.6,'사장님이 받을 수 있는 <span class="y">지원금</span>,<br>놓치고 계시진 않나요?'],
+  [3.6,7.4,'<span class="y">지역 · 업종 · 창업연도</span><br>AI에게 이것만 알려주세요'],
+  [7.4,11.0,'<span class="m">기업마당</span> 같은 공식 공고에서<br>조건 맞는 후보를 찾아줍니다'],
+  [11.0,14.6,'단, <span class="y">신청 자격과 마감일</span>은<br>꼭 공고 원문으로 확인!'],
+  [14.6,19.1,'찾는 질문(프롬프트)이 필요하면<br>문자로 <span class="y">\'지원금\'</span> 보내주세요<span class="tel">010-3973-4338</span><span class="sm">NADOOAI · 공고 원문 확인 필수</span>'],
+];
+const BEATS=[0.8,3.6,7.4,11.0,14.6];
+
+// deterministic sparkles
+const SP=[]; let seed=11; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+for(let i=0;i<16;i++){const d=document.createElement('div');d.className='spark';
+  const x=rnd()*1040, y=520+rnd()*900, ph=rnd()*6.28, sp=0.8+rnd()*1.4, sc=0.5+rnd()*0.9;
+  SP.push({d,x,y,ph,sp,sc}); $('sparks').appendChild(d);}
+
+let last=-2;
+window.render=function(t){
+  // camera: slow push-in toward face/phone + punch on each caption change
+  let z=1+0.075*(t/DUR);
+  for(const b of BEATS){const k=t-b; if(k>=0&&k<0.5) z+=0.018*Math.sin(Math.PI*clamp(k/0.5));}
+  const fx=560, fy=1000+40*Math.sin(t*0.25);
+  $('world').style.transform=`translate(${fx}px,${fy}px) scale(${z}) translate(${-fx}px,${-fy}px) translate(0px,${OY}px) scale(${S0})`;
+  // headline: fixed, gentle breathing
+  const hb=1+0.012*Math.sin(t*5.2); $('head').style.transform=`scale(${hb})`;
+  // bubble bounce when results appear
+  const bb=P(t,7.55,0.5); $('bub').style.transform=`scale(${1+0.16*Math.sin(Math.PI*bb)*(1-bb*0.3)})`;
+  // calendar alert rings
+  [['r1',11.05],['r2',11.25]].forEach(([id,s])=>{const r=$(id); if(t<s||t>14.6){r.style.opacity=0;return}
+    const k=((t-s)%0.9)/0.9; r.style.opacity=(1-k)*0.95; r.style.transform=`scale(${0.7+0.7*k})`;});
+  // sparkles
+  for(const s of SP){const a=Math.max(0,Math.sin(t*s.sp*2+s.ph)); s.d.style.opacity=a*0.9;
+    s.d.style.transform=`translate(${s.x}px,${s.y}px) scale(${s.sc*(0.4+0.6*a)}) rotate(${t*40+s.ph*30}deg)`;}
+  // captions
+  let idx=-1; for(let i=0;i<CAPS.length;i++){if(t>=CAPS[i][0]&&t<CAPS[i][1]){idx=i;break}}
+  const box=$('box'); if(idx!==last){box.innerHTML=idx>=0?CAPS[idx][2]:''; last=idx;}
+  box.style.display=idx>=0?'block':'none';
+  if(idx>=0){const k=eb(P(t,CAPS[idx][0],0.28)); box.style.transform=`scale(${lerp(0.85,1,k)})`; box.style.opacity=clamp(P(t,CAPS[idx][0],0.12));}
+};
+window.render(0);
+</script>
+</body>
+</html>
